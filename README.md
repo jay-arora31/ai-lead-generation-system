@@ -5,8 +5,6 @@
 [![Apollo](https://img.shields.io/badge/Apollo-API-orange.svg)](https://apollo.io/)
 [![Google Sheets](https://img.shields.io/badge/Google-Sheets-34A853.svg)](https://sheets.google.com/)
 
-> **AI Engineer Test Solution** - A complete B2B lead generation automation system that finds prospects, analyzes their business needs, and generates personalized outreach messages.
-
 ## 📋 Assignment Overview
 
 This project was built as a solution to the **AI Engineer Test - Lead Generation & Personalized Outreach** challenge with a **1-hour timebox**. The system demonstrates:
@@ -93,10 +91,9 @@ GOOGLE_SHEETS_ENDPOINT=your_apps_script_url_here
 uv run main.py
 
 # Custom parameters
-uv run main.py --industry "software" --size-range "50-200" --location "United States" --max-leads 5
+uv run main.py --industry "software" --size-range "51-100" --location "United States" --max-leads 5
 
-# Test Google Sheets integration
-uv run test_google_sheets.py
+
 ```
 
 ## 📊 Demo Output
@@ -184,11 +181,8 @@ ai-lead-generation-system/
 │   └── logger.py             # Logging setup
 ├── 📁 data/                  # Output directories
 │   ├── output/               # Generated lead files
-│   ├── leads/                # Lead data storage
-│   └── cache/                # API response cache
 ├── 📄 main.py                # CLI entry point
 ├── 📄 google_apps_script.js  # Google Sheets integration
-├── 📄 test_google_sheets.py  # Integration testing
 ├── 📄 pyproject.toml         # Dependencies
 └── 📄 README.md              # This file
 ```
@@ -214,51 +208,5 @@ ai-lead-generation-system/
 - Automatic spreadsheet creation and formatting  
 - Real-time data synchronization
 - Team collaboration features
-
-
-## 🧪 Testing
-
-```bash
-# Test all integrations
-uv run test_google_sheets.py
-
-# Test individual components
-uv run services/apollo_service.py
-uv run services/scraper_service.py
-uv run services/ai_service.py
-```
-
-## 📝 Assignment Evaluation
-
-### **✅ Requirements Met**
-
-| Requirement | Implementation | Status |
-|-------------|----------------|--------|
-| **Backend Script** | Python CLI with argparse | ✅ Complete |
-| **Apollo Integration** | Full API client with retry logic | ✅ Complete |
-| **Website Scraping** | AI-powered content analysis | ✅ Complete |
-| **Message Generation** | OpenAI-powered personalization | ✅ Complete |
-| **Data Output** | Google Sheets + JSON backup | ✅ Complete |
-| **Hardware Use Case** | B2B hardware store context | ✅ Complete |
-| **5-10 Leads Demo** | Console + file output | ✅ Complete |
-
-### **🏆 Bonus Features Delivered**
-
-- ✅ **Smart Lead Scoring** - Hardware opportunity analysis
-- ✅ **Email Validation** - Hunter.io integration  
-- ✅ **Lead Deduplication** - Built-in duplicate detection
-- ✅ **Error Handling** - Comprehensive retry mechanisms
-- ✅ **Configuration Management** - Environment-based setup
-- ✅ **Clean Code** - Professional architecture & documentation
-
-### **💡 AI-Assist Usage**
-
-This project demonstrates effective use of AI coding assistants for:
-- **API Integration**: Rapid client implementation with error handling
-- **Data Processing**: Complex data transformation and validation
-- **Business Logic**: Hardware opportunity analysis algorithms  
-- **Documentation**: Comprehensive README and code comments
-- **Testing**: Integration test suite development
-
 
 
