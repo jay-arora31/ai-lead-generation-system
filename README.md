@@ -3,6 +3,7 @@
 [![Python](https://img.shields.io/badge/Python-3.11+-blue.svg)](https://www.python.org/)
 [![OpenAI](https://img.shields.io/badge/OpenAI-GPT--4-green.svg)](https://openai.com/)
 [![Apollo](https://img.shields.io/badge/Apollo-API-orange.svg)](https://apollo.io/)
+[![Hunter.io](https://img.shields.io/badge/Hunter.io-API-red.svg)](https://hunter.io/)
 [![Google Sheets](https://img.shields.io/badge/Google-Sheets-34A853.svg)](https://sheets.google.com/)
 
 ## Assignment Overview
