@@ -70,6 +70,7 @@ cd ai-lead-generation-system
 
 # Install dependencies using uv
 uv pip install -e .
+uv sync
 ```
 
 ### 2. Configuration
@@ -87,6 +88,7 @@ GOOGLE_SHEETS_ENDPOINT=your_apps_script_url_here
 ### 3. Run Lead Generation
 ```bash
 # Basic usage - hardware companies in India, 250-500 employees
+
 uv run main.py
 
 # Custom parameters

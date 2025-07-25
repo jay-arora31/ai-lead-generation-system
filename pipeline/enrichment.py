@@ -43,14 +43,14 @@ class LeadEnrichmentPipeline:
         Returns:
             List of enriched leads with personalized messages
         """
-        print(f"Starting lead generation pipeline...")
-        print(f"Search criteria: {search_criteria.size_range} employees, {search_criteria.industry}, {search_criteria.location}")
+        logger.info("Starting lead generation pipeline...")
+        logger.info(f"Search criteria: {search_criteria.size_range} employees, {search_criteria.industry}, {search_criteria.location}")
         
         enriched_leads = []
         
         try:
             # Step 1: Find companies using Apollo API
-            print("\nStep 1: Finding companies via Apollo API...")
+            logger.info("Step 1: Finding companies via Apollo API...")
             companies = self.apollo_service.find_companies(
                 company_size=search_criteria.size_range,
                 industry=search_criteria.industry,
@@ -58,46 +58,46 @@ class LeadEnrichmentPipeline:
             )
             
             if not companies:
-                print("No companies found matching criteria")
+                logger.warning("No companies found matching criteria")
                 return []
             
-            print(f"Found {len(companies)} companies")
+            logger.info(f"Found {len(companies)} companies")
             
             # Limit to max_leads for processing
             companies_to_process = companies[:max_leads]
-            print(f"Processing top {len(companies_to_process)} companies...")
+            logger.info(f"Processing top {len(companies_to_process)} companies...")
             
             # Step 2 & 3: Scrape websites and generate messages for each company
             for i, company in enumerate(companies_to_process, 1):
                 try:
-                    print(f"\nProcessing company {i}/{len(companies_to_process)}: {company.name}")
+                    logger.info(f"Processing company {i}/{len(companies_to_process)}: {company.name}")
                     
                     # Skip companies without websites
                     if not company.website:
-                        print(f"  Warning: No website found for {company.name}, skipping...")
+                        logger.warning(f"No website found for {company.name}, skipping...")
                         continue
                     
                     # Step 2: Scrape company website for insights
-                    print(f"  Analyzing website: {company.website}")
+                    logger.info(f"Analyzing website: {company.website}")
                     insights = self.scraper_service.scrape_website(company.website)
                     
                     # Step 3: Find contact information
-                    print(f"  Finding contact information...")
+                    logger.info("Finding contact information...")
                     contacts = []
                     try:
                         decision_makers = self.hunter_service.get_all_contacts(company.website)
                         contacts = [contact.model_dump() for contact in decision_makers]
                         if contacts:
-                            print(f"    Found {len(contacts)} decision maker contacts")
+                            logger.info(f"Found {len(contacts)} decision maker contacts")
                         else:
-                            print(f"    No decision maker contacts found")
+                            logger.info("No decision maker contacts found")
                     except HunterError as e:
-                        print(f"    Hunter.io error: {e}")
+                        logger.error(f"Hunter.io error: {e}")
                     except Exception as e:
-                        print(f"    Contact search failed: {e}")
+                        logger.error(f"Contact search failed: {e}")
                     
                     # Step 4: Generate personalized message
-                    print(f"  Generating personalized message...")
+                    logger.info("Generating personalized message...")
                     message = self.ai_service.generate_message(company, insights)
                     
                     # Create enriched lead
@@ -109,14 +109,14 @@ class LeadEnrichmentPipeline:
                     )
                     
                     enriched_leads.append(lead)
-                    print(f"  Successfully processed {company.name}")
+                    logger.info(f"Successfully processed {company.name}")
                     
                 except Exception as e:
-                    print(f"  Error processing {company.name}: {str(e)}")
+                    logger.error(f"Error processing {company.name}: {str(e)}")
                     continue
             
-            print(f"\nPipeline completed successfully!")
-            print(f"Generated {len(enriched_leads)} enriched leads")
+            logger.info("Pipeline completed successfully!")
+            logger.info(f"Generated {len(enriched_leads)} enriched leads")
             
             return enriched_leads
             
@@ -190,10 +190,8 @@ class LeadEnrichmentPipeline:
                 google_sheets_success = self._save_to_google_sheets(leads_data)
                 if google_sheets_success:
                     logger.info("Successfully saved leads to Google Sheets")
-                    print("✅ Leads saved to Google Sheets successfully!")
             except Exception as e:
                 logger.error(f"Failed to save to Google Sheets: {str(e)}")
-                print(f"❌ Failed to save to Google Sheets: {str(e)}")
         
         # Always save local backup or primary storage if Google Sheets failed
         if not filename:
@@ -225,10 +223,10 @@ class LeadEnrichmentPipeline:
             json.dump(full_leads_data, f, indent=2)
         
         if google_sheets_success:
-            print(f"📄 Local backup saved to: {filename}")
+            logger.info(f"Local backup saved to: {filename}")
             return "Google Sheets + Local Backup"
         else:
-            print(f"Leads saved to: {filename}")
+            logger.info(f"Leads saved to: {filename}")
             return filename
     
     def _save_to_google_sheets(self, leads_data: List[dict]) -> bool:
@@ -286,18 +284,18 @@ class LeadEnrichmentPipeline:
         Display a summary of generated leads
         """
         if not leads:
-            print("No leads to display")
+            logger.info("No leads to display")
             return
         
-        print(f"\nLEAD GENERATION SUMMARY")
-        print("=" * 60)
-        print(f"Total Leads Generated: {len(leads)}")
+        logger.info("LEAD GENERATION SUMMARY")
+        logger.info("=" * 60)
+        logger.info(f"Total Leads Generated: {len(leads)}")
         
         for i, lead in enumerate(leads, 1):
-            print(f"\nLead {i}: {lead.company.name}")
-            print(f"  Industry: {lead.company.industry}")
-            print(f"  Size: {lead.company.employee_count} employees")
-            print(f"  Website: {lead.company.website}")
+            logger.info(f"Lead {i}: {lead.company.name}")
+            logger.info(f"  Industry: {lead.company.industry}")
+            logger.info(f"  Size: {lead.company.employee_count} employees")
+            logger.info(f"  Website: {lead.company.website}")
             
             # Extract key insights
             insights = lead.insights
@@ -305,7 +303,7 @@ class LeadEnrichmentPipeline:
                 business_summary = insights.get('business_summary', 'N/A')
                 hardware_needs = insights.get('hardware_opportunity', {})
                 
-                print(f"  Business: {business_summary}")
+                logger.info(f"  Business: {business_summary}")
                 
                 # Show hardware opportunities
                 needs = []
@@ -316,25 +314,24 @@ class LeadEnrichmentPipeline:
                 if hardware_needs.get('peripherals'): needs.append('Peripherals')
                 
                 if needs:
-                    print(f"  Hardware Opportunities: {', '.join(needs)}")
+                    logger.info(f"  Hardware Opportunities: {', '.join(needs)}")
                 else:
-                    print(f"  Hardware Opportunities: General IT needs")
+                    logger.info(f"  Hardware Opportunities: General IT needs")
             
-            print(f"  Message Subject: {self._extract_subject_line(lead.personalized_message)}")
+            logger.info(f"  Message Subject: {self._extract_subject_line(lead.personalized_message)}")
             
             # Show contact information
             if lead.contacts:
-                print(f"  Decision Maker Contacts:")
+                logger.info("  Decision Maker Contacts:")
                 for contact in lead.contacts[:3]:  # Show top 3
                     email = contact.get('email', 'N/A')
                     name = f"{contact.get('first_name', '')} {contact.get('last_name', '')}".strip()
                     position = contact.get('position', 'N/A')
-                    confidence = contact.get('confidence', 0)
-                    print(f"    • {email} - {name} ({position}) - {confidence}% confidence")
+                    logger.info(f"    - {email} - {name} ({position})")
             else:
-                print(f"  Decision Maker Contacts: None found")
+                logger.info("  Decision Maker Contacts: None found")
             
-            print("-" * 40)
+            logger.info("-" * 40)
 
     def _extract_subject_line(self, email_message: str) -> str:                                                                                                                                                                                                                                                                                                                                                             
         """Extract subject line from formatted email"""
@@ -343,4 +340,3 @@ class LeadEnrichmentPipeline:
             if line.startswith('Subject:'):
                 return line.replace('Subject:', '').strip()
         return "N/A"
-

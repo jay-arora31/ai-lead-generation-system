@@ -150,7 +150,6 @@ class ScraperService:
                     {"role": "user", "content": prompt}
                 ],
                 temperature=0.2,
-                max_tokens=800
             )
             
             raw_response = response.choices[0].message.content

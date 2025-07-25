@@ -19,7 +19,7 @@ class ContactInfo(BaseModel):
     last_name: Optional[str] = Field(default="", description="Last name")
     position: Optional[str] = Field(default="", description="Job title/position")
     department: Optional[str] = Field(default="", description="Department")
-    confidence: Optional[int] = Field(default=0, description="Confidence score (0-100)")
+
     verified: bool = Field(default=False, description="Email verification status")
 
 class DomainSearchResult(BaseModel):
@@ -88,7 +88,6 @@ class HunterService:
                     last_name=email_data.get('last_name') or '',
                     position=email_data.get('position') or '',
                     department=email_data.get('department') or '',
-                    confidence=email_data.get('confidence', 0),
                     verified=email_data.get('verification', {}).get('result') == 'deliverable'
                 )
                 contacts.append(contact)
@@ -161,7 +160,6 @@ class HunterService:
                 first_name=email_data.get('first_name', first_name),
                 last_name=email_data.get('last_name', last_name),
                 position=email_data.get('position', ''),
-                confidence=email_data.get('confidence', 0),
                 verified=email_data.get('verification', {}).get('result') == 'deliverable'
             )
             
@@ -249,10 +247,7 @@ class HunterService:
             all_contacts = []
             for contact in domain_result.emails:
                 all_contacts.append(contact)
-                logger.debug(f"Added contact: {contact.email} - {contact.position} - {contact.confidence}%")
-            
-            # Sort by confidence score
-            all_contacts.sort(key=lambda x: x.confidence, reverse=True)
+                logger.debug(f"Added contact: {contact.email} - {contact.position}")
             
             logger.info(f"Found {len(all_contacts)} contacts for {domain}")
             return all_contacts
@@ -297,7 +292,7 @@ def main():
                     logger.info(f"  • {contact.email}")
                     logger.info(f"    Name: {contact.first_name} {contact.last_name}")
                     logger.info(f"    Position: {contact.position}")
-                    logger.info(f"    Confidence: {contact.confidence}%")
+        
                     logger.info(f"    Verified: {contact.verified}")
             else:
                 logger.info("No contacts found")

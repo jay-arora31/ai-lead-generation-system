@@ -1,2 +1,0 @@
-# This file ensures the data/leads directory is tracked by git
-# even when it's empty, preserving the project structure 
