@@ -26,7 +26,7 @@ def create_search_criteria(args) -> SearchCriteria:
 def main():
     """Main lead generation workflow"""
     parser = argparse.ArgumentParser(description='Lead Generation Automation for Hardware Store')
-    parser.add_argument('--size-range', default='50-200', help='Company size range (e.g., 50-200)')
+    parser.add_argument('--size-range', default='201-500', help='Company size range (e.g., 50-200)')
     parser.add_argument('--industry', default='hardware', help='Industry or keywords to search for')
     parser.add_argument('--location', default='india', help='Location to search in')
     parser.add_argument('--max-leads', type=int, default=10, help='Maximum number of leads to process')

@@ -1,24 +1,24 @@
-# 🚀 AI Lead Generation Automation System
+# AI Lead Generation Automation System
 
 [![Python](https://img.shields.io/badge/Python-3.11+-blue.svg)](https://www.python.org/)
 [![OpenAI](https://img.shields.io/badge/OpenAI-GPT--4-green.svg)](https://openai.com/)
 [![Apollo](https://img.shields.io/badge/Apollo-API-orange.svg)](https://apollo.io/)
 [![Google Sheets](https://img.shields.io/badge/Google-Sheets-34A853.svg)](https://sheets.google.com/)
 
-## 📋 Assignment Overview
+## Assignment Overview
 
 The system demonstrates:
 
-- ✅ **Backend API/Script** with command-line interface
-- ✅ **Apollo API Integration** for company discovery  
-- ✅ **AI-Powered Website Scraping** for business insights
-- ✅ **Personalized Message Generation** using OpenAI
-- ✅ **Google Sheets Integration** for data management
-- ✅ **Hardware Store B2B Use Case** implementation
+- **Backend API/Script** with command-line interface
+- **Apollo API Integration** for company discovery  
+- **AI-Powered Website Scraping** for business insights
+- **Personalized Message Generation** using OpenAI
+- **Google Sheets Integration** for data management
+- **Hardware Store B2B Use Case** implementation
 
-## 🎯 Key Features
+## Key Features
 
-### **Core Functionality** ✅
+### **Core Functionality**
 - **Company Discovery**: Uses Apollo API to find companies matching specific criteria
 - **AI Website Analysis**: Extracts key business insights and hardware needs using OpenAI
 - **Contact Finding**: Integrates Hunter.io to find decision-maker email addresses  
@@ -26,15 +26,15 @@ The system demonstrates:
 - **Google Sheets Integration**: Automatically saves leads to organized spreadsheets
 - **Command Line Interface**: Easy-to-use CLI with flexible parameters
 
-### **Bonus Features Implemented** 🏆
-- ✅ **Email Validation & Contact Finding** via Hunter.io API
-- ✅ **Lead Deduplication Logic** built into the pipeline
-- ✅ **Error Handling & Retry Mechanisms** with exponential backoff
-- ✅ **Configuration Management** with environment variables
-- ✅ **Clean, Well-Structured Code** with comprehensive documentation
-- ✅ **Professional Testing Suite** with integration tests
+### **Bonus Features Implemented**
+- **Email Validation & Contact Finding** via Hunter.io API
+- **Lead Deduplication Logic** built into the pipeline
+- **Error Handling & Retry Mechanisms** with exponential backoff
+- **Configuration Management** with environment variables
+- **Clean, Well-Structured Code** with comprehensive documentation
+- **Professional Testing Suite** with integration tests
 
-## 🛠️ Technical Architecture
+## Technical Architecture
 
 ```
 ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
@@ -60,7 +60,7 @@ The system demonstrates:
 └───────┘    └────────────────┘   └──────────────┘
 ```
 
-## 🚀 Quick Start
+## Quick Start
 
 ### 1. Installation
 ```bash
@@ -97,7 +97,7 @@ uv run main.py --industry "software" --size-range "51-100" --location "United St
 
 ```
 
-## 📊 Demo Output
+## Demo Output
 
 ### Console Output
 ```
@@ -115,8 +115,8 @@ Processing company 1/5: Pentoz Technology
   Generating personalized message...
   Successfully processed Pentoz Technology
 
-✅ Leads saved to Google Sheets successfully!
-📄 Local backup saved to: data/output/leads_20250125_143045.json
+Leads saved to Google Sheets successfully!
+Local backup saved to: data/output/leads_20250125_143045.json
 
 LEAD GENERATION SUMMARY
 ============================================================
@@ -129,8 +129,8 @@ Lead 1: Pentoz Technology
   Business: Technology company providing on-demand talent for AI, cloud, and cybersecurity
   Hardware Opportunities: Workstations, Servers, Networking, Storage, Peripherals
   Decision Maker Contacts:
-    • saradha@pentoz.com - Saradha M P (Co-Founder) - 99% confidence
-    • hello@pentoz.com - General Contact (Support) - 90% confidence
+    - saradha@pentoz.com - Saradha M P (Co-Founder) - 99% confidence
+    - hello@pentoz.com - General Contact (Support) - 90% confidence
 ```
 
 ### Generated Personalized Message
@@ -164,31 +164,31 @@ Hardware Solutions Specialist
 [Phone] | [Email]
 ```
 
-## 🗂️ Project Structure
+## Project Structure
 
 ```
 ai-lead-generation-system/
-├── 📁 services/              # External API integrations
+├── services/              # External API integrations
 │   ├── apollo_service.py     # Apollo API client
 │   ├── scraper_service.py    # AI-powered web scraping
 │   ├── ai_service.py         # OpenAI message generation
 │   └── hunter_service.py     # Contact finding
-├── 📁 pipeline/              # Lead processing pipeline
+├── pipeline/              # Lead processing pipeline
 │   └── enrichment.py         # Main orchestration logic
-├── 📁 schemas/               # Data models & validation
+├── schemas/               # Data models & validation
 │   └── schemas.py            # Pydantic/dataclass models
-├── 📁 utils/                 # Configuration & utilities
+├── utils/                 # Configuration & utilities
 │   ├── config.py             # Environment management
 │   └── logger.py             # Logging setup
-├── 📁 data/                  # Output directories
+├── data/                  # Output directories
 │   ├── output/               # Generated lead files
-├── 📄 main.py                # CLI entry point
-├── 📄 google_apps_script.js  # Google Sheets integration
-├── 📄 pyproject.toml         # Dependencies
-└── 📄 README.md              # This file
+├── main.py                # CLI entry point
+├── google_apps_script.js  # Google Sheets integration
+├── pyproject.toml         # Dependencies
+└── README.md              # This file
 ```
 
-## 🔧 API Integrations
+## API Integrations
 
 ### **Apollo API** - Lead Discovery
 - Finds companies matching search criteria

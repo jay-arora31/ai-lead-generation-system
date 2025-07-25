@@ -40,10 +40,10 @@ class OutreachMessage(BaseModel):
 {self.closing}
 
 Best regards,
-[Your Name]
+Jay Arora
 Hardware Solutions Specialist
-[Your Hardware Store Name]
-[Phone] | [Email]"""
+NewTech Computers
++1 (619) 200-0000 | jay@newtechcomputers.com"""
 
 class AIServiceError(Exception):
     """Custom exception for AI service errors"""
