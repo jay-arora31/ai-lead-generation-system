@@ -7,7 +7,7 @@
 
 ## 📋 Assignment Overview
 
-This project was built as a solution to the **AI Engineer Test - Lead Generation & Personalized Outreach** challenge with a **1-hour timebox**. The system demonstrates:
+The system demonstrates:
 
 - ✅ **Backend API/Script** with command-line interface
 - ✅ **Apollo API Integration** for company discovery  
@@ -27,7 +27,6 @@ This project was built as a solution to the **AI Engineer Test - Lead Generation
 - **Command Line Interface**: Easy-to-use CLI with flexible parameters
 
 ### **Bonus Features Implemented** 🏆
-- ✅ **Smart Lead Scoring** based on website signals and hardware opportunities
 - ✅ **Email Validation & Contact Finding** via Hunter.io API
 - ✅ **Lead Deduplication Logic** built into the pipeline
 - ✅ **Error Handling & Retry Mechanisms** with exponential backoff
