@@ -12,7 +12,7 @@
  */
 
 // Configuration - UPDATE THESE VALUES
-const SHEET_ID = '1kZdi7Fxr-sg_IYqTCjnMVsCsowM-mzHfhAJ_kX4iJqo'; // Updated with your actual Sheet ID
+const SHEET_ID = 'sheet_id';
 const SHEET_NAME = 'Leads'; // Name of the sheet tab
 
 /**
