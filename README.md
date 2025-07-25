@@ -82,22 +82,54 @@ cp env.example .env
 APOLLO_API_KEY=your_apollo_api_key_here
 OPENAI_API_KEY=your_openai_api_key_here
 HUNTER_API_KEY=your_hunter_api_key_here
-GOOGLE_SHEETS_ENDPOINT=your_apps_script_url_here
+GOOGLE_SHEETS_ENDPOINT=https://script.google.com/macros/s/AKfycbyP1yj-uIE_0P7DiwbgnyBTMJFkDYF6E0mZ8X8dmRkMskYGDEZLzi-qgvle6tAe6Vkpdw/exec
 ```
 
-### 3. Run Lead Generation
+### 3. Google Apps Script Setup
+
+To enable automatic data saving to Google Sheets, you need to deploy the provided Apps Script:
+
+1. **Create a new Google Sheets document** for your leads data
+2. **Copy the Sheet ID** from your Google Sheets URL:
+   ```
+   https://docs.google.com/spreadsheets/d/[SHEET_ID]/edit
+   ```
+3. **Set up Google Apps Script**:
+   - In your Google Sheets, go to `Extensions > Apps Script`
+   - Replace the default code with the contents of `google_apps_script.js` from this repository
+   - Update the `SHEET_ID` variable with your actual Google Sheets ID
+   - Save the script with a meaningful name
+
+4. **Deploy as Web App**:
+   - Click `Deploy > New deployment`
+   - Choose type: `Web app`
+   - Execute as: `Me`
+   - Who has access: `Anyone`
+   - Click `Deploy` and authorize permissions
+
+5. **Update Environment Variables**:
+   - Copy the deployment URL and set it as `GOOGLE_SHEETS_ENDPOINT` in your `.env` file
+   - The format will be: `https://script.google.com/macros/s/[SCRIPT_ID]/exec`
+
+**Note:** The `google_apps_script.js` file contains the complete server-side code needed to receive lead data and automatically organize it in your spreadsheet with proper formatting and headers.
+
+### 4. Run Lead Generation
 ```bash
 # Basic usage - hardware companies in India, 250-500 employees
 
 uv run main.py
 
 # Custom parameters
-uv run main.py --industry "software" --size-range "51-100" --location "United States" --max-leads 5
+uv run main.py --industry "hardware" --size-range "201-500" --location "India" --max-leads 5
 
 
 ```
 
 ## Demo Output
+
+**Live Demo Spreadsheet:** [View Generated Leads](https://docs.google.com/spreadsheets/d/1kZdi7Fxr-sg_IYqTCjnMVsCsowM-mzHfhAJ_kX4iJqo/edit?gid=0#gid=0)
+
+**Google Apps Script Endpoint:** [https://script.google.com/macros/s/AKfycbyP1yj-uIE_0P7DiwbgnyBTMJFkDYF6E0mZ8X8dmRkMskYGDEZLzi-qgvle6tAe6Vkpdw/exec](https://script.google.com/macros/s/AKfycbyP1yj-uIE_0P7DiwbgnyBTMJFkDYF6E0mZ8X8dmRkMskYGDEZLzi-qgvle6tAe6Vkpdw/exec)
 
 ### Console Output
 ```
